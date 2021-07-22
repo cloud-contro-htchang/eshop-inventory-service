@@ -18,12 +18,14 @@ public interface ProductInventoryMapper {
 	
 	@Select("SELECT * FROM product_inventory WHERE id=#{id}")
 	@Results({
-			@Result(column = "value", property = "value"),
 			@Result(column = "product_id", property = "productId")
 	})
 	public ProductInventory findById(Long id);
 	
-	@Select("SELECT * FROM product_inventory WHERE product_id=#{productId}")  
+	@Select("SELECT * FROM product_inventory WHERE product_id=#{productId}")
+	@Results({
+			@Result(column = "product_id", property = "productId")
+	})
 	public ProductInventory findByProductId(Long productId);
 	
 }
