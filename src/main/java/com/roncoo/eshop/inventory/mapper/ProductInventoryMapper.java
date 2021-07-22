@@ -1,10 +1,6 @@
 package com.roncoo.eshop.inventory.mapper;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import com.roncoo.eshop.inventory.model.ProductInventory;
 
@@ -20,7 +16,11 @@ public interface ProductInventoryMapper {
 	@Delete("DELETE FROM product_inventory WHERE id=#{id}")  
 	public void delete(Long id);
 	
-	@Select("SELECT * FROM product_inventory WHERE id=#{id}")  
+	@Select("SELECT * FROM product_inventory WHERE id=#{id}")
+	@Results({
+			@Result(column = "value", property = "value"),
+			@Result(column = "product_id", property = "productId")
+	})
 	public ProductInventory findById(Long id);
 	
 	@Select("SELECT * FROM product_inventory WHERE product_id=#{productId}")  
